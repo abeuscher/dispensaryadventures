@@ -1,0 +1,15 @@
+extends inc/page.pug
+block template
+  :php
+    /*
+    Template Name: Home Page
+    */
+block content
+  :php
+    $blurb = get_field("intro_blurb");
+  article
+    .content-wrapper.padding-bottom
+      .home-blogroll
+        include ./inc/blog-roll
+      :php
+        echo $blurb;

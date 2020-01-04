@@ -1,0 +1,20 @@
+extends inc/page.pug
+block template
+  :php
+    /*
+    Template Name: Single Blog Entry Template
+    */
+block content
+  article
+    section.article-header-block
+      .category-header
+        .content-wrapper
+          h2 Blog Post
+      .content-wrapper
+        h1
+          :php
+            the_title();
+    section.article-main-block
+      .content-wrapper                
+        :php
+          the_content();

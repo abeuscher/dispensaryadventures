@@ -1,0 +1,37 @@
+.page-header {
+  width: 100%;
+  font-family: $nav-font;
+  background: $black;
+  position: relative;
+  .inner {
+    width: auto;
+    padding: 0 $gutter-width/2;
+    text-align: center;
+    @include bp(m) {
+      max-width: 1080px;
+      padding: 0;
+      margin: 0 auto;
+    }
+    nav {
+      position: absolute;
+      right: $gutter-width;
+      top: $gutter-width;
+      a {
+        color: $white;
+      }
+    }
+  }
+  .logo {
+    color: $white;
+    &:hover {
+      color: $white;
+    }
+    h1 {
+      font-size: 18px;
+      font-family: $nav-font;
+      padding: 0;
+      line-height: 4;
+      position: relative;
+    }
+  }
+}

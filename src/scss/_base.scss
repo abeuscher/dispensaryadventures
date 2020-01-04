@@ -1,0 +1,121 @@
+body {
+  font-family: $body-font;
+  color: $body-text-color;
+  background: $off-white;
+  min-height:100vh;
+}
+#wrapper {
+  background: $white;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+.padding-top {
+  padding-top:$gutter-width*2;
+}
+.padding-bottom {
+  padding-bottom:$gutter-width*2;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin:0;
+  font-family: $header-font;
+  padding:$gutter-width/2 0 $gutter-width/3;
+}
+p {
+
+}
+a {
+  text-decoration: none;
+  color: $body-link-color;
+  &:hover {
+    text-decoration: none;
+    color: $body-link-hover-color;
+  }
+}
+p,
+li {
+  margin:0;
+  padding-top:$gutter-width/4;
+  padding-bottom:$gutter-width/3;
+  font-weight: 300;
+  font-size: 1.2em;
+}
+.centered {
+  text-align:center;
+}
+.gallery {
+  width:100%;
+  padding-bottom:$gutter-width;
+  .inner {
+
+    .slide-image {
+      @include aspect-ratio(16,9);
+      background-size:contain;
+      background-color:$off-black;
+      background-position:center center;
+      background-repeat: no-repeat;
+    }
+  }
+}
+.padded {
+  padding:$gutter-width/2 $gutter-width;
+}
+.padding-top {
+  padding-top:$gutter-width;
+}
+.padding-bottom {
+  padding-bottom:$gutter-width;
+}
+.padding-both {
+  padding-top:$gutter-width;
+  padding-bottom:$gutter-width;
+}
+.article-main-block {
+  p, li {
+    line-height:1.8;
+  }
+}
+.content-wrapper {
+  max-width:1080px;
+  width:90%;
+  margin:0 auto; 
+}
+.category-header {
+  background:linear-gradient(90deg, $black 0%, $darker-green 40%, $darker-green 60%, $black 100%);
+  h2 {
+    color:$light-gray;
+    padding:0;
+    line-height:3;
+    font-size:10px;
+    text-transform: uppercase;
+    text-align:center;
+    letter-spacing:2px;
+  }
+}
+.review-header {
+  padding-bottom:$gutter-width/2;
+  text-align:center;
+  h1 {
+    margin:0;
+    padding:$gutter-width 0 $gutter-width/2;
+  }
+
+}
+.bg-green {
+  background:$dark-green;
+  color:$white;
+}
+.bg-dark-green {
+  background:$darker-green;
+  color:$white;
+}
+.bg-black {
+  background:$black;
+  color:$white;
+}
