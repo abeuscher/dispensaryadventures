@@ -2,7 +2,7 @@ body {
   font-family: $body-font;
   color: $body-text-color;
   background: $off-white;
-  min-height:100vh;
+  min-height: 100vh;
 }
 #wrapper {
   background: $white;
@@ -12,10 +12,10 @@ body {
   min-height: 100%;
 }
 .padding-top {
-  padding-top:$gutter-width*2;
+  padding-top: $gutter-width * 2;
 }
 .padding-bottom {
-  padding-bottom:$gutter-width*2;
+  padding-bottom: $gutter-width * 2;
 }
 h1,
 h2,
@@ -23,12 +23,11 @@ h3,
 h4,
 h5,
 h6 {
-  margin:0;
+  margin: 0;
   font-family: $header-font;
-  padding:$gutter-width/2 0 $gutter-width/3;
+  padding: $gutter-width/2 0 $gutter-width/3;
 }
 p {
-
 }
 a {
   text-decoration: none;
@@ -40,82 +39,247 @@ a {
 }
 p,
 li {
-  margin:0;
-  padding-top:$gutter-width/4;
-  padding-bottom:$gutter-width/3;
+  margin: 0;
+  padding-top: $gutter-width/4;
+  padding-bottom: $gutter-width/3;
   font-weight: 300;
   font-size: 1.2em;
 }
 .centered {
-  text-align:center;
+  text-align: center;
+}
+.cartoon {
+  font-family: $nav-font;
+  font-weight: normal;
 }
 .gallery {
-  width:100%;
-  padding-bottom:$gutter-width;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: $gutter-width;
+  position: relative;
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  .flickity-button {
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    width: 25px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    border: none;
+    opacity: 0;
+    svg {
+      fill: #fff;
+      stroke: #fff;
+      width: 100%;
+    }
+    &.previous {
+      left: 0;
+    }
+    &.next {
+      right: 0;
+    }
+  }
+  .flickity-page-dots {
+    list-style: none;
+    padding: 0;
+    display: block;
+    text-align: center;
+    margin: $gutter-width 0;
+    opacity: 0.25;
+    transition: opacity 0.5s ease-in;
+    li {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      line-height: 0;
+      padding: 0;
+      border-radius: 50%;
+      background: $bright-green;
+      margin: 0 $gutter-width/2;
+      border: 1px solid transparent;
+      &.is-selected {
+        background: $dark-green;
+        border-color: $white;
+      }
+      &:hover {
+        border-color: $pale-green;
+        cursor: pointer;
+      }
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .slide {
+    width: 100%;
+    @include aspect-ratio(4, 3);
+    .zoom-icon {
+      display: none;
+      background: transparent;
+      border: none;
+      font-size: 1em;
+      position: absolute;
+      bottom: $gutter-width/2;
+      left: $gutter-width/2;
+      opacity: 0.6;
+      color: transparent;
+      font-size: 0.8em;
+      transition: all 0.25s ease-in;
+      .fa {
+        color: $white;
+        padding-right: 0.3em;
+        font-size: 1.2em;
+      }
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+        color: $white;
+      }
+    }
+  }
   .inner {
-
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
     .slide-image {
-      @include aspect-ratio(16,9);
-      background-size:contain;
-      background-color:$off-black;
-      background-position:center center;
+      @include aspect-ratio(4, 3);
+      width: 100%;
+      background-size: cover;
+      background-color: $off-black;
+      background-position: center center;
       background-repeat: no-repeat;
+      overflow: hidden;
+    }
+  }
+  &:hover {
+    .flickity-button {
+      opacity: 1;
+    }
+  }
+  &.flickity-enabled {
+    .slide .zoom-icon {
+      display: block;
     }
   }
 }
+
 .padded {
-  padding:$gutter-width/2 $gutter-width;
+  padding: $gutter-width/2 $gutter-width;
 }
 .padding-top {
-  padding-top:$gutter-width;
+  padding-top: $gutter-width;
 }
 .padding-bottom {
-  padding-bottom:$gutter-width;
+  padding-bottom: $gutter-width;
 }
 .padding-both {
-  padding-top:$gutter-width;
-  padding-bottom:$gutter-width;
+  padding-top: $gutter-width;
+  padding-bottom: $gutter-width;
 }
 .article-main-block {
-  p, li {
-    line-height:1.8;
+  p,
+  li {
+    line-height: 1.5;
+  }
+  li {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 .content-wrapper {
-  max-width:1080px;
-  width:90%;
-  margin:0 auto; 
+  max-width: 1080px;
+  width: 90%;
+  margin: 0 auto;
 }
 .category-header {
-  background:linear-gradient(90deg, $black 0%, $darker-green 40%, $darker-green 60%, $black 100%);
+  background: linear-gradient(90deg, $black 0%, $darker-green 40%, $darker-green 60%, $black 100%);
   h2 {
-    color:$light-gray;
-    padding:0;
-    line-height:3;
-    font-size:10px;
+    color: $light-gray;
+    padding: 0;
+    line-height: 3;
+    font-size: 10px;
     text-transform: uppercase;
-    text-align:center;
-    letter-spacing:2px;
+    text-align: center;
+    letter-spacing: 2px;
   }
 }
 .review-header {
-  padding-bottom:$gutter-width/2;
-  text-align:center;
+  padding-bottom: $gutter-width/2;
+  text-align: center;
   h1 {
-    margin:0;
-    padding:$gutter-width 0 $gutter-width/2;
+    margin: 0;
+    padding: $gutter-width 0 $gutter-width/2;
   }
-
 }
 .bg-green {
-  background:$dark-green;
-  color:$white;
+  background: $dark-green;
+  color: $white;
 }
 .bg-dark-green {
-  background:$darker-green;
-  color:$white;
+  background: $darker-green;
+  color: $white;
 }
 .bg-black {
-  background:$black;
-  color:$white;
+  background: $black;
+  color: $white;
+}
+.lens {
+  opacity: 0;
+  position: absolute;
+  border: 2px solid grey;
+  border-radius: 50%;
+  overflow: hidden;
+
+  box-shadow: inset 0 0 10px 2px grey;
+  filter: drop-shadow(0 0 2px grey);
+
+  .slide-image {
+    bottom: auto;
+  }
+  &.active {
+    opacity: 1;
+    cursor: none;
+    & > * {
+      cursor: none;
+    }
+  }
+}
+
+.sort-table-arrows {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  button {
+    font-size: 10px;
+    padding: 0 0 0 10px;
+    margin: 0;
+    background: transparent;
+    border: none;
+    .fa {
+      color:$green;
+      &:hover {
+        color:lighten($green,10%);
+      }
+    }
+    &:active, &:focus {
+      outline:none;
+    }
+  }
+}
+table.sortable {
+  thead {
+    font-weight: bold;
+  }
+  th.active {
+    text-decoration: underline;
+  }
+  td, th {
+    width: 10%;
+    padding: 5px;
+    text-align:left;
+  }
 }

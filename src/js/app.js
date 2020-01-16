@@ -12,9 +12,12 @@ var siteSettings = {
 };
 var parseHTML = require("./utils/parse-html.js");
 
-var vidgetTemplates = {
-  
+var widgetTemplates = {
+
 };
+var ReviewCarousel = require("./page-elements/review-carousel");
+var Magnifier = require("./magnifier/");
+var SortTable = require("./sort-table/");
 var ScrollMagic = require("scrollmagic");
 
 window.addEventListener("load", function () {
@@ -27,6 +30,40 @@ window.addEventListener("load", function () {
 });
 
 var siteActions = [{
+  "element":".sortable",
+  "action":function(els) {
+    SortTable(els);
+  }
+},{
+  "element":".zoom-icon",
+  "action":function(els) {
+    for (i = 0; i < els.length; i++) {
+      els[i].addEventListener("click", function(e) {
+        e.preventDefault();
+        var lens = e.target.parentNode.querySelectorAll(".lens")[0];
+        if (lens) {
+          if (lens.classList.contains("active")) {
+            lens.classList.remove("active");
+          }
+          else {
+            lens.classList.add("active");
+          }
+          
+        }
+      })
+    }
+  }
+},{
+  "element": ".magnify",
+  "action": function (els) {
+    for (i = 0; i < els.length; i++) {
+      Magnifier(els[i], 2, 400, document.getElementById("review-carousel"));
+    }
+  }
+}, {
+  "element": "#review-carousel",
+  "action": ReviewCarousel
+}, {
   "element": "[data-bg]",
   "action": require("./utils/data-bg")
 }, {

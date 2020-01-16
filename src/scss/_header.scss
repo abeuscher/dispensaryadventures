@@ -17,7 +17,12 @@
       right: $gutter-width;
       top: $gutter-width;
       a {
+        font-weight:normal;
         color: $white;
+        letter-spacing:2px;
+        &:hover {
+          color:$green;
+        }
       }
     }
   }
@@ -27,10 +32,12 @@
       color: $white;
     }
     h1 {
-      font-size: 18px;
+      font-size: 32px;
       font-family: $nav-font;
+      font-weight:normal;
+      color:$green;
       padding: 0;
-      line-height: 4;
+      line-height: 3;
       position: relative;
     }
   }
