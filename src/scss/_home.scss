@@ -1,22 +1,23 @@
 .home-blogroll {
   display:flex;
+  justify-content: space-between;
   flex-wrap:wrap;
   margin-top:$gutter-width;
-  .blog-thumb {
+  .blog-thumb, .blog-spacer {
     flex-basis:100%;
     display:block;
     margin-bottom:$gutter-width*2;
     width:100%;
+    
     @include bp(m) {
       display:flex;
+      border:1px solid $black;
       flex-direction:column;
       margin-bottom:$gutter-width;
     }
     .inner {
       position:relative;
-      margin:0 $gutter-width/2;
       padding:$gutter-width/2;
-      border:1px solid $off-black;
       height:100%;
     }
     .thumb {
@@ -39,7 +40,7 @@
       right:$gutter-width/2;
       overflow:hidden;
       top:auto;
-      background:rgba(0,0,0,0.8);
+      background:rgba(0,0,0,0.6);
       color:$white;
       h2 {
         margin:0;
@@ -48,18 +49,37 @@
       }
     }
     &:hover {
+      border-color:$green;
       .inner {
-        border-color:$green;
+        
+        @include bp(m) {
+          background:rgba(0,0,0,.1);
+        }
+        
         .content {
           background:$bright-green;
         }
       }
     }
     @include bp(m) {
-      flex-basis:33.3%;
+      flex-basis:31.3%;
+      
       .inner {
         width:auto;
       }
     }
   }
+  .blog-spacer {
+    display:none;
+    border-color:transparent;
+    &:hover {
+      border-color:transparent;
+    }
+    @include bp(m) {
+      display:block;
+    }
+  }
+}
+.home-more-button {
+  text-align:center;
 }

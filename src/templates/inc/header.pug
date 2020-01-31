@@ -3,4 +3,12 @@ header.page-header#page-header
     a.logo(href="/")
       h1 Dispensary Adventures
     nav
-      a.btn-about(href="/about/") about
+      input#menu-toggle(type="checkbox")
+      label(for="menu-toggle")
+        include ./pot-leaf.pug
+      .menu
+        ul
+          li
+            a.btn-about(href="/about/") About
+          li
+            a.btn-about(href="/list/") Weed Review Stats

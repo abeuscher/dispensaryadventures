@@ -9,7 +9,8 @@ block content
     :php
       $info = get_field("product_info");
       $scores = get_field("scores");
-    article
+    article(role='article',itemprop='haspart',itemscope='',itemtype='http://schema.org/Article')
+      meta(itemscope='itemscope',itemprop='mainEntityOfPage',itemType='https://schema.org/WebPage')
       section.article-header-block
         .category-header
           .content-wrapper
@@ -17,14 +18,13 @@ block content
               printf("<h2>Product Review : %s", $info["product_type"]);
         .review-header.bg-black
           .content-wrapper
-            h1
+            h1(itemprop='headline')
                 :php
                     the_title();  
             :php
                 printf("%s", get_field("short_review"));        
       section.photos-block.bg-black
         .content-wrapper
-          
           .gallery#review-carousel
               :php
                   foreach(get_field("photos") as $idx=>$photo) {
@@ -46,7 +46,7 @@ block content
                 printf("<div class='data-point package-date'><span class='label'>Packaged</span><span class='value'>%s</span></div>", $info["package_date"]); 
                 printf("<div class='data-point purchase-date'><span class='label'>Purchased</span><span class='value'>%s from %s</span></div>", $info["purchase_date"], $info["dispensary"]); 
       section.article-main-block.padding-both
-        .content-wrapper
+        .content-wrapper(itemprop="articleBody")
           :php
             printf("%s", get_field("long_review"));   
       section.product-scores-block.bg-green.padding-bottom   

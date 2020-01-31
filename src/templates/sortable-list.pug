@@ -5,38 +5,27 @@ block template
     Template Name: Sortable List
     */
 block content
+    :php
+        $args = array(
+            'posts_per_page'   => -1,
+            'post_type'        => 'post',
+        );
+        $the_query = new WP_Query( $args );
+        $products = [];
+        if ( $the_query->have_posts() ) : 
+            while ( $the_query->have_posts() ) : $the_query->the_post(); 
+                $pi = get_field("product_info");
+                if ($pi) {
+                array_push($products, [
+                                "info"=>$pi,
+                                "scores"=>get_field("scores")
+                            ]);
+                }  
+            endwhile; 
+        endif;   
+        printf("<script>var productData=%s</script>",json_encode($products));     
     article
         section.article-main-block.padding-both
             .content-wrapper
-                table.sortable
-                    thead
-                        tr
-                            :php
-                                $headers = ["Manufacturer","Strain","Dispensary","Cost/gram","Score", "Packaged Date","Purchased Date"];
-                                foreach($headers as $idx=>$header) {
-                                    printf("<th class='%s'>%s<div class='sort-table-arrows'><button class='button' data-sort='%s|true'><i class='fa fa-chevron-up'></i></button><button class='button' data-sort='%s|false'><i class='fa fa-chevron-down'></i></button></div></th>", strtolower($header),$header, strtolower($header),strtolower($header));
-                                }
-                    tbody
-                        :php
-                            $rows = "<tr>";
-                            $args = array(
-                                'posts_per_page'   => -1,
-                                'post_type'        => 'post',
-                            );
-                            $the_query = new WP_Query( $args );
-                            if ( $the_query->have_posts() ) : 
-                                while ( $the_query->have_posts() ) : $the_query->the_post(); 
-                                    
-                                    $pi = get_field("product_info");
-                                    if ($pi) {
-                                        $scores = get_field("scores");
-                                        $fields = [$pi["brand"],$pi["strain"],$pi["dispensary"],"$" . round((float)$pi["cost"] / (float)$pi["weight"], 2),(intval($scores["strength"]) + intval($scores["taste"]) + intval($scores["quality"])),$pi["package_date"],$pi["package_date"]];    
-                                        
-                                        foreach($fields as $idx=>$field) {
-                                            $rows .= sprintf("<td class='%s' data-label='%s'>%s</td>", strtolower($headers[$idx]),strtolower($headers[$idx]),$field);
-                                        }
-                                        $rows .= "</tr><tr>";
-                                    }  
-                                endwhile; 
-                            endif;   
-                            printf("%s",substr($rows,0,strlen($rows)-4));          
+                #product-table-sortable
+     

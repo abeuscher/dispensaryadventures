@@ -5,16 +5,17 @@ block template
     Template Name: Single Blog Entry Template
     */
 block content
-  article
+  article(role='article',itemprop='haspart',itemscope='',itemtype='http://schema.org/Article')
+    meta(itemscope='itemscope',itemprop='mainEntityOfPage',itemType='https://schema.org/WebPage')
     section.article-header-block
       .category-header
         .content-wrapper
           h2 Blog Post
       .content-wrapper
-        h1
+        h1(itemprop='headline')
           :php
-            the_title();
-    section.article-main-block
-      .content-wrapper                
+            echo get_the_title();
+    section.article-main-block.padding-bottom
+      .content-wrapper(itemprop="articleBody")                
         :php
           the_content();
