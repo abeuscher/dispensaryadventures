@@ -18,7 +18,8 @@ block content
                 if ($pi) {
                 array_push($products, [
                                 "info"=>$pi,
-                                "scores"=>get_field("scores")
+                                "scores"=>get_field("scores"),
+                                "url"=>get_the_permalink()
                             ]);
                 }  
             endwhile; 

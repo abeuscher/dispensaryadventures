@@ -8,11 +8,13 @@
         return [{
             "label":"Manufacturer",
             "type":"alpha",
-            "value":p.info.brand
+            "value":p.info.brand,
+            "link":p.url
         },{
             "label":"Strain",
             "type":"alpha",
-            "value":p.info.strain
+            "value":p.info.strain,
+            "link":p.url
         },{
             "label":"Dispensary",
             "type":"alpha",
@@ -83,4 +85,8 @@ table.sortable
             tr
                 each item in product
                     td
-                        p(class=item.label.toLowerCase().replace(/\W/g, ''))!=item.value
+                        if (item.link)
+                            a(href=item.link)
+                                p(class=item.label.toLowerCase().replace(/\W/g, ''))!=item.value
+                        else
+                            p(class=item.label.toLowerCase().replace(/\W/g, ''))!=item.value

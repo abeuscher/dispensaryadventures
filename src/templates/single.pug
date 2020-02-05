@@ -15,6 +15,20 @@ block content
         h1(itemprop='headline')
           :php
             echo get_the_title();
+        .date
+          :php
+            echo get_the_date( 'M d, Y' );
+    :php
+      if (get_field("photos")!="") {
+    section.photos-block.bg-black
+      .content-wrapper
+        .gallery#review-carousel
+            :php
+                foreach(get_field("photos") as $idx=>$photo) {
+                  printf("<div class='slide'><div class='inner'><div class='slide-image magnify' data-bg-array='%s'></div><button class='zoom-icon'><span class='fa fa-search-plus'></span>toggle zoom thingy</button></div></div>", json_encode($photo["image"], JSON_UNESCAPED_SLASHES));
+                }               
+    :php
+      }
     section.article-main-block.padding-bottom
       .content-wrapper(itemprop="articleBody")                
         :php

@@ -183,7 +183,24 @@ li {
   padding-top: $gutter-width;
   padding-bottom: $gutter-width;
 }
+.article-header-block {
+  h1 {
+    padding-top:$gutter-width;
+    font-family: $nav-font;
+    font-size:2em;
+    letter-spacing:3px;
+    -webkit-text-stroke:1px $green;
+    text-align:center;
+  }
+  .date {
+    display:block;
+    text-align:center;
+    padding-bottom:$gutter-width*2;
+  }
+}
 .article-main-block {
+  min-height:80vh;
+  padding-bottom:$gutter-width*2;
   p,
   li {
     line-height: 1.5;
