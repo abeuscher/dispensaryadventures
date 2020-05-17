@@ -7,3 +7,6 @@ npm-debug.log
 yarn-error.log
 logs
 data
+photos
+.env
+/!.env

@@ -229,7 +229,30 @@ li {
     float: left;
     padding: 0 $gutter-width $gutter-width 0;
   }
+  blockquote {
+    margin:$gutter-width/2 0 $gutter-width/2 3em;
+    padding-left:7em;
+    line-height:1.2;
+    font-size:.9em;
+    position:relative;
+    * {
+      position:relative;
+    }
+    &:before {
+      content:'“';
+      position:absolute;
+      left:0;
+      top:0;
+      line-height:.9;
+      -webkit-text-stroke:1px $black;
+      font-size:12em;
+      opacity:.8;
+      color:$dark-green;
+      font-family:$nav-font;
+    }
+  }
 }
+// ”
 .category-header {
   background: linear-gradient(90deg, $black 0%, $darker-green 40%, $darker-green 60%, $black 100%);
   h2 {
