@@ -101,7 +101,7 @@ li {
       margin: 0 $gutter-width/2;
       border: 1px solid transparent;
       &.is-selected {
-        background: $dark-green;
+        background: $white;
         border-color: $white;
       }
       &:hover {
@@ -153,6 +153,14 @@ li {
       background-position: center center;
       background-repeat: no-repeat;
       overflow: hidden;
+    }
+    .caption {
+      position:absolute;
+      bottom:0;
+      background:rgba(0,0,0,.5);
+      width:100%;
+      text-align:center;
+      line-height:2.5;
     }
   }
   &:hover {

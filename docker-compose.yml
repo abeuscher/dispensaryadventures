@@ -26,6 +26,7 @@ services:
       context: "./bin/mysql8"
     container_name: 'mysql'
     restart: 'always'
+    command: --lower_case_table_names=2
     ports:
       - "${HOST_MACHINE_MYSQL_PORT}:3306"
     volumes: 

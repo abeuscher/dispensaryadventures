@@ -28,7 +28,8 @@ block content
           .gallery#review-carousel
               :php
                   foreach(get_field("photos") as $idx=>$photo) {
-                    printf("<div class='slide'><div class='inner'><div class='slide-image magnify' data-bg-array='%s'></div><button class='zoom-icon'><span class='fa fa-search-plus'></span>toggle zoom thingy</button></div></div>", json_encode($photo["image"], JSON_UNESCAPED_SLASHES));
+                    $caption = $photo["caption"] !== "" ? sprintf("<div class='caption'>%s</div>",$photo["caption"]) : "";
+                    printf("<div class='slide'><div class='inner'><div class='slide-image magnify' data-bg-array='%s'></div><button class='zoom-icon'><span class='fa fa-search-plus'></span>toggle zoom thingy</button>%s</div></div>", json_encode($photo["image"], JSON_UNESCAPED_SLASHES),$caption);
                   }      
       section.product-meta-block.bg-dark-green
         .content-wrapper
