@@ -32,7 +32,6 @@ window.addEventListener("load", function () {
 var siteActions = [{
   "element": "#product-table-sortable",
   "action": function (els) {
-    console.log(productData);
     if (productData) {
       els[0].appendChild(parseHTML(widgetTemplates.sortTable(productData)));
     }

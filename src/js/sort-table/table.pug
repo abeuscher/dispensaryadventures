@@ -9,82 +9,91 @@
             "label":"Manufacturer",
             "type":"alpha",
             "value":p.info.brand,
-            "link":p.url
+            "link":p.url,
+            "mobile":true
         },{
             "label":"Strain",
             "type":"alpha",
             "value":p.info.strain,
-            "link":p.url
+            "link":p.url,
+            "mobile":true
         },{
             "label":"Dispensary",
             "type":"alpha",
-            "value":p.info.dispensary            
+            "value":p.info.dispensary,
+            "mobile":true            
         },{
-            "label":"Listed THC",
+            "label":"THC %",
             "type":"number",
-            "value":parseFloat(p.info.listed_thc_percentage.replace("%","")) + "%" 
+            "value":parseFloat(p.info.listed_thc_percentage.replace("%","")) + "%",
+            "mobile":true 
         },{
             "label":"Grams Purchased",
             "type":"number",
-            "value":p.info.weight           
+            "value":p.info.weight,
+            "mobile":false           
         },{
-            "label":"Cost/Gram",
+            "label":"$/Gram",
             "type":"number",
-            "value":"$" + parseFloat(p.info.cost / p.info.weight).toFixed(2)          
+            "value":"$" + parseFloat(p.info.cost / p.info.weight).toFixed(2),
+            "mobile":true          
         },{
             "label":"Packaged",
             "type":"date",
-            "value":p.info.package_date           
+            "value":p.info.package_date,
+            "mobile":false           
         },{
             "label":"Purchased",
             "type":"date",
-            "value":p.info.purchase_date            
+            "value":p.info.purchase_date,
+            "mobile":false            
         },{
             "label":"Taste",
             "type":"number",
-            "value":p.scores.taste            
+            "value":p.scores.taste,
+            "mobile":false            
         },{
             "label":"Appearance",
             "type":"number",
-            "value":p.scores.quality            
+            "value":p.scores.quality,
+            "mobile":false            
         },{
             "label":"Strength",
             "type":"number",
-            "value":p.scores.strength            
+            "value":p.scores.strength,
+            "mobile":false            
         },{
             "label":"Total",
             "type":"number",
-            "value":parseInt(p.scores.taste) + parseInt(p.scores.quality) + parseInt(p.scores.strength)         
-        }
+            "value":parseInt(p.scores.taste) + parseInt(p.scores.quality) + parseInt(p.scores.strength),
+            "mobile":true         
+        }]
 
-
-        ]
     }
-    console.log(products);
 
-table.sortable
-    thead
-        tr.header-header
-            th.source-header(colspan="3")
+.grid-table.sortable
+    .table-header
+        .table-header-row.table-row.header-header
+            .table-header-cell.table-cell.source-header(colspan="3")
                 p Source
-            th.details-header(colspan="5")
+            .table-header-cell.table-cell.details-header(colspan="5")
                 p Deets
-            th.score-header(colspan="4")
+            .table-header-cell.table-cell.score-header(colspan="4")
                 p Scores
-        tr
+        .table-header-row.table-row
             each header in products[0]
-                th
+                .table-header-cell.table-cell(class=header.mobile ? header.type : header.type + " hide-mobile")
                     p!=header.label
                     .sort-table-arrows
-                        button.button(data-sort=header.label.toLowerCase().replace(/\W/g, ''),data-direction="true",data-type=header.type)
+                        button.button(data-sort=header.label.toLowerCase().replace(/\W/g, ''),data-direction="true",data-type=header.type, title="Sort by " + header.label)
                             i.fa.fa-chevron-up
-                        button.button(data-sort=header.label.toLowerCase().replace(/\W/g, ''),data-direction="false",data-type=header.type)
+                        button.button(data-sort=header.label.toLowerCase().replace(/\W/g, ''),data-direction="false",data-type=header.type, title="Sort by " + header.label)
                             i.fa.fa-chevron-down
-    tbody
+    .table-body
         each product in products
-            tr
+            .table-body-row.table-row
                 each item in product
-                    td
+                    .table-body-cell.table-cell(class=item.mobile ? item.type : item.type + " hide-mobile")
                         if (item.link)
                             a(href=item.link)
                                 p(class=item.label.toLowerCase().replace(/\W/g, ''))!=item.value

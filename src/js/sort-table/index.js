@@ -30,8 +30,8 @@ function SortTable(tables) {
     }
 }
 function doSort(ascending, columnClassName, el, dataType) {
-    var tbody = el.getElementsByTagName("tbody")[0];
-    var rows = tbody.getElementsByTagName("tr");
+    var tbody = el.getElementsByClassName("table-body")[0];
+    var rows = tbody.getElementsByClassName("table-row");
     var unsorted = true;
     while (unsorted) {
         unsorted = false;
