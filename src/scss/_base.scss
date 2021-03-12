@@ -318,26 +318,22 @@ li {
   float: right;
   display: flex;
   flex-direction: column;
-  button {
-    font-size: 10px;
+  i {
+    font-size: 0.5vw;
     padding: 0 0 0 0;
     margin: 0;
     background: transparent;
     border: none;
-    .fa {
-      color: $green;
-      &:hover {
-        color: lighten($green, 10%);
-      }
-    }
+    color: black;
     &:active,
     &:focus {
       outline: none;
     }
     &.active {
-      .fa {
-        color: $white;
-      }
+      color: $white;
+    }
+    @include bp(m) {
+      font-size: 6px;
     }
   }
 }
@@ -349,7 +345,7 @@ li {
   }
   .table-row {
     display: grid;
-    grid-template-columns: 24% 24% 24% 9% 9% 10%;
+    grid-template-columns: 24% 24% 17% 17% 18%;
 
     @include bp(m) {
       grid-template-columns: 12% 12% 12% 8% 8% 8% 8% 8% 6% 6% 6% 6%;
@@ -358,46 +354,69 @@ li {
 }
 
 .sortable {
+  .table-controls {
+    .inner {
+      padding:0 0 25px;
+      text-align:center;
+      font-size:12px;
+      select {
+        outline:none;
+        &:active, &:focus {
+          outline:none;
+        }
+      }
+    }
+  }
   p {
     margin: 0;
   }
   .table-cell {
-    display:flex;
-    justify-content:center;
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
-    width:100%;
+    width: 100%;
     &.alpha {
-      justify-content:left;
-      padding-left:10px;
+      
+      padding-left: 10px;
       position: relative;
       .sort-table-arrows {
         position: absolute;
-        right:10px;
+        right: 10px;
       }
     }
     p {
-      padding:0;
+      padding: 0;
     }
-    &.number, &.date {
-      flex-wrap:wrap;
+    &.number,
+    &.date {
+      flex-wrap: wrap;
       .sort-table-arrows {
-        flex-basis:100%;
+        flex-basis: 100%;
       }
     }
+    &.number {
+      justify-content: flex-end;
+      text-align: right;
+    }
+    &.number.score, &.date {
+      justify-content: center;
+    }
+    &.date {
+      font-size:10px;
+    }
     &.hide-mobile {
-      display:none;
+      display: none;
       @include bp(m) {
-        display:flex;
+        display: flex;
       }
     }
   }
   .table-body-cell {
     font-size: 12px;
-    
   }
   .table-body-row {
     &:nth-child(even) {
-      background:rgba(0,0,0,.1);
+      background: rgba(0, 0, 0, 0.1);
     }
   }
   .table-header {
@@ -408,14 +427,15 @@ li {
       float: left;
     }
     .table-header-row.header-header {
-      display:none;
+      display: none;
       @include bp(m) {
-        display:grid;
+        display: grid;
         grid-template-columns: 36% 40% 24%;
       }
       padding: 0;
       margin: 0;
       .table-cell {
+        justify-content: center;
         padding: 0;
         margin: 0;
       }

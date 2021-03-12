@@ -22,7 +22,6 @@ function GetPosts() {
                 .then(function(data) {
                     forEach(data, function(thisPost) {
                         bucket.appendChild(parseHTML(templates.postBlock(thisPost)));
-    
                     });
                     var extraSpace = 3-data.length%3 > 2 ? 0 : 3-data.length%3;
                     for (i=0;i<extraSpace;i++) {

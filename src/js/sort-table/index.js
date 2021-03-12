@@ -1,7 +1,20 @@
 function SortTable(tables) {
     for (i = 0; i < tables.length; i++) {
         var buttons = tables[i].querySelectorAll("[data-sort]");
+        let categoryMenu = tables[i].querySelectorAll(".category-sort")[0]
+        let directionMenu = tables[i].querySelectorAll(".sort-direction")[0]
+
+        categoryMenu.addEventListener("change", e => {
+            let newValue = JSON.parse(e.target.options[e.target.selectedIndex].value)
+            doSort(directionMenu.options[directionMenu.selectedIndex].value==="true",newValue.label.toLowerCase().replace(/\W/g, ''),tables[0],newValue.type)
+        })
+        directionMenu.addEventListener("change", e => {
+            let newValue = JSON.parse(categoryMenu.options[categoryMenu.selectedIndex].value)
+            doSort(directionMenu.options[directionMenu.selectedIndex].value==="true",newValue.label.toLowerCase().replace(/\W/g, ''),tables[0],newValue.type)
+        })
         for (b = 0; b < buttons.length; b++) {
+
+            /*
             buttons[b].addEventListener("click", function (e) {
                 e.preventDefault();
                 var sortField = this.getAttribute("data-sort");
@@ -21,6 +34,7 @@ function SortTable(tables) {
                 clearActive(buttons);
                 this.classList.add("active");
             });
+            */
         }
         function clearActive(els) {
             for (b = 0; b < els.length; b++) {
@@ -30,6 +44,7 @@ function SortTable(tables) {
     }
 }
 function doSort(ascending, columnClassName, el, dataType) {
+    console.log(ascending, columnClassName, el, dataType)
     var tbody = el.getElementsByClassName("table-body")[0];
     var rows = tbody.getElementsByClassName("table-row");
     var unsorted = true;
@@ -51,7 +66,7 @@ function doSort(ascending, columnClassName, el, dataType) {
                     break;
                 case "date":
                     value = new Date(value);
-                    nextValue = new Date(nextValue);  
+                    nextValue = new Date(nextValue);
                     if (!ascending ? value > nextValue : value < nextValue) {
                         tbody.insertBefore(nextRow, row);
                         unsorted = true;

@@ -21,14 +21,14 @@
             "label":"Dispensary",
             "type":"alpha",
             "value":p.info.dispensary,
-            "mobile":true            
+            "mobile":false            
         },{
             "label":"THC %",
             "type":"number",
             "value":parseFloat(p.info.listed_thc_percentage.replace("%","")) + "%",
             "mobile":true 
         },{
-            "label":"Grams Purchased",
+            "label":"Amount Purchased",
             "type":"number",
             "value":p.info.weight,
             "mobile":false           
@@ -38,40 +38,54 @@
             "value":"$" + parseFloat(p.info.cost / p.info.weight).toFixed(2),
             "mobile":true          
         },{
-            "label":"Packaged",
+            "label":"Pack. Date",
             "type":"date",
             "value":p.info.package_date,
             "mobile":false           
         },{
-            "label":"Purchased",
+            "label":"Purch. Date",
             "type":"date",
             "value":p.info.purchase_date,
-            "mobile":false            
+            "mobile":false,
+            "default":true           
         },{
             "label":"Taste",
             "type":"number",
             "value":p.scores.taste,
-            "mobile":false            
+            "mobile":false,
+            "score":true            
         },{
-            "label":"Appearance",
+            "label":"Look",
             "type":"number",
             "value":p.scores.quality,
-            "mobile":false            
+            "mobile":false,
+            "score":true               
         },{
             "label":"Strength",
             "type":"number",
             "value":p.scores.strength,
-            "mobile":false            
+            "mobile":false,
+            "score":true               
         },{
-            "label":"Total",
+            "label":"Overall",
             "type":"number",
             "value":parseInt(p.scores.taste) + parseInt(p.scores.quality) + parseInt(p.scores.strength),
-            "mobile":true         
+            "mobile":true,
+            "score":true            
         }]
 
     }
-
 .grid-table.sortable
+    .table-controls
+        .inner
+            - let categories=Object.keys(products[0]).map(category=>{return products[0][category].label})
+            label(for="category-sort") Sort By:
+            select.category-sort
+                for option,idx in products[0]
+                    option(value=JSON.stringify(option),selected=option.default,data-idx=idx)=option.label      
+            select.sort-direction
+                option(selected,value="true") asc
+                option(value="false") desc     
     .table-header
         .table-header-row.table-row.header-header
             .table-header-cell.table-cell.source-header(colspan="3")
@@ -82,18 +96,13 @@
                 p Scores
         .table-header-row.table-row
             each header in products[0]
-                .table-header-cell.table-cell(class=header.mobile ? header.type : header.type + " hide-mobile")
+                .table-header-cell.table-cell(class=(header.mobile ? header.type : header.type + " hide-mobile")+(header.score ? " score" : ""))
                     p!=header.label
-                    .sort-table-arrows
-                        button.button(data-sort=header.label.toLowerCase().replace(/\W/g, ''),data-direction="true",data-type=header.type, title="Sort by " + header.label)
-                            i.fa.fa-chevron-up
-                        button.button(data-sort=header.label.toLowerCase().replace(/\W/g, ''),data-direction="false",data-type=header.type, title="Sort by " + header.label)
-                            i.fa.fa-chevron-down
     .table-body
         each product in products
             .table-body-row.table-row
                 each item in product
-                    .table-body-cell.table-cell(class=item.mobile ? item.type : item.type + " hide-mobile")
+                    .table-body-cell.table-cell(class=(item.mobile ? item.type : item.type + " hide-mobile")+(item.score ? " score" : ""))
                         if (item.link)
                             a(href=item.link)
                                 p(class=item.label.toLowerCase().replace(/\W/g, ''))!=item.value
