@@ -30,7 +30,7 @@ block content
                         $tags = rtrim($tags,"| ");
                     }
                     $thumb = get_field("blog_thumb")!="" ? get_field("blog_thumb")["sizes"]["medium"] : the_seo_framework()->get_image_from_cache();
-                    printf("<a class='blog-thumb' href='%s'><article class='inner'><div class='thumb' data-bg='%s'></div><div class='content'><h2>%s</h2></div><div class='post-date'>%s</div></article></a>",  get_the_permalink(), $thumb,get_the_title(), get_the_date( 'm/d/Y' ));
+                    printf("<a class='blog-thumb' href='%s'><article class='inner'><div class='thumb' data-bg='%s'></div><div class='content'><h2>%s</h2></div><div class='post-date'>%s</div></article></a>",  get_the_permalink(), $thumb,get_the_title(), get_the_date( 'n/d/Y' ));
                 }}
       .home-more-button
         :php
