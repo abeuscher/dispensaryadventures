@@ -375,8 +375,13 @@ li {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    &.alpha {
-      
+    a {
+      color:$black;
+      &:hover {
+        color:$black;
+      }
+    }
+    &.alpha { 
       padding-left: 10px;
       position: relative;
       .sort-table-arrows {
@@ -385,7 +390,9 @@ li {
       }
     }
     p {
-      padding: 0;
+      padding: 1em 0;
+      font-size:16px;
+      font-weight:bold;
     }
     &.number,
     &.date {
@@ -415,8 +422,12 @@ li {
     font-size: 12px;
   }
   .table-body-row {
+    transition: all .25s ease-in;
     &:nth-child(even) {
       background: rgba(0, 0, 0, 0.1);
+    }
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
     }
   }
   .table-header {
