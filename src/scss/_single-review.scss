@@ -81,3 +81,38 @@
         }
     }
 }
+section.prev-next {
+    background:$darker-green;
+    color:$white;
+    border-top:1px solid $bright-green;
+    .col-half {
+        text-align: center;
+    }
+    .pagination-label {
+        text-transform:uppercase;
+        color:$green;
+        letter-spacing: 2px;
+        font-size:10px;
+    }
+    .blog-thumb {
+        margin:0 auto;
+        @include bp(m) {
+            width:50%;
+        }
+        .thumb {
+            display:none;
+            @include bp(m) {
+                display:block;
+            }
+        }
+        .content {
+            position: relative;
+            @include bp(m) {
+                position: absolute;
+            }        
+            h2 {
+                font-size:1em;
+            }
+        }
+    }
+}

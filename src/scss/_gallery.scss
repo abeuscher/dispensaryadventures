@@ -1,0 +1,124 @@
+.gallery {
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: $gutter-width;
+  position: relative;
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  .flickity-button {
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    width: 25px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    border: none;
+    opacity: 0;
+    svg {
+      fill: #fff;
+      stroke: #fff;
+      width: 100%;
+    }
+    &.previous {
+      left: 0;
+    }
+    &.next {
+      right: 0;
+    }
+  }
+  .flickity-page-dots {
+    list-style: none;
+    padding: 0;
+    display: block;
+    text-align: center;
+    margin: $gutter-width 0;
+    opacity: 0.25;
+    transition: opacity 0.5s ease-in;
+    li {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      line-height: 0;
+      padding: 0;
+      border-radius: 50%;
+      background: $bright-green;
+      margin: 0 $gutter-width/2;
+      border: 1px solid transparent;
+      &.is-selected {
+        background: $white;
+        border-color: $white;
+      }
+      &:hover {
+        border-color: $pale-green;
+        cursor: pointer;
+      }
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .slide {
+    width: 100%;
+    @include aspect-ratio(4, 3);
+    .zoom-icon {
+      display: none;
+      background: transparent;
+      border: none;
+      font-size: 1em;
+      position: absolute;
+      bottom: $gutter-width/2;
+      left: $gutter-width/2;
+      opacity: 0.6;
+      color: transparent;
+      font-size: 0.8em;
+      transition: all 0.25s ease-in;
+      .fa {
+        color: $white;
+        padding-right: 0.3em;
+        font-size: 1.2em;
+      }
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+        color: $white;
+      }
+    }
+  }
+  .inner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    .slide-image {
+      @include aspect-ratio(4, 3);
+      width: 100%;
+      background-size: cover;
+      background-color: $off-black;
+      background-position: center center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+    .caption {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      width: 100%;
+      text-align: center;
+      line-height: 2.5;
+    }
+  }
+  &:hover {
+    .flickity-button {
+      opacity: 1;
+    }
+  }
+  &.flickity-enabled {
+    .slide .zoom-icon {
+      @include bp(m) {
+        display: block;
+      }
+    }
+  }
+}
