@@ -88,10 +88,16 @@ block content
     section.prev-next 
       .content-wrapper.flex.padding-both
         .prev-entry.col-half
+          :php
+            if (get_previous_post(true)) {
           p.pagination-label Previous Entry 
           :php
             echo writeThumb(get_previous_post(true));
+            }
         .next-entry.col-half
-          p.pagination-label Next Entry
+          :php
+            if (get_next_post(true)) {
+          p.pagination-label Next Entry    
           :php
             echo writeThumb(get_next_post(true));
+            } 
