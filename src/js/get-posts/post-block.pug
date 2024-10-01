@@ -1,8 +1,7 @@
-if locals !== undefined
-  a.blog-thumb(href=locals.link)
-    article.inner
-      .thumb(data-bg=locals.acf.blog_thumb ? locals.acf.blog_thumb.sizes.medium : "")
-      .content
-        h2!=locals.title.rendered
-      - let theDate = new Intl.DateTimeFormat('en-US').format(new Date(locals.date))
-      .post-date!=theDate
+a.blog-thumb(href=locals.link)
+  article.inner
+    .thumb(data-bg=locals.acf.blog_thumb ? locals.acf.blog_thumb.sizes.medium : "")
+    .content
+      h2!=locals.title.rendered
+    - let theDate = new Intl.DateTimeFormat('en-US').format(new Date(locals.date))
+    .post-date!=theDate

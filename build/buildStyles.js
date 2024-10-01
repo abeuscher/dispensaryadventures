@@ -7,7 +7,7 @@ const buildStyles = (siteSettings) => {
     style: "compressed",
     quietDeps: true,
   });
-  fs.writeFile(siteSettings.stylesheets[0].buildDir + "stylesheet.css", fileData.css, (err) => {
+  fs.writeFile(siteSettings.stylesheets[0].buildDir + "style.css", fileData.css, (err) => {
     if (err) {
       console.error(err);
     }

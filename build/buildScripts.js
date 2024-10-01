@@ -1,7 +1,32 @@
 const esbuild = require("esbuild");
-const pugPlugin = require("esbuild-plugin-pug");
+const pug = require("pug");
 const path = require("path");
 const fs = require("fs");
+
+const pluginPug = () => ({
+  name: "pug",
+  setup(build) {
+    build.onLoad({ filter: /\.(jade|pug)$/ }, async (args) => {
+      // Read the Pug template file
+      const template = await fs.promises.readFile(args.path, "utf8");
+
+      // Compile the Pug template into a client-side JS function
+      const compiledFunction = pug.compileClient(template, {
+        filename: args.path,
+        inlineRuntimeFunctions: false,
+        compileDebug: false,
+      });
+
+      // Return the function as a module that can be imported
+      const contents = `
+        const pug = require('pug-runtime');
+        module.exports = ${compiledFunction};
+      `;
+
+      return { contents, loader: "js" };
+    });
+  },
+});
 
 const buildScripts = (siteSettings) => {
   console.log("Writing theme script file");
@@ -19,18 +44,10 @@ const buildScripts = (siteSettings) => {
   esbuild.build({
     entryPoints: [entryPoint],
     bundle: true,
-    minify: false,
+    minify: true,
     outfile: outfile,
     platform: "browser",
-    plugins: [
-      pugPlugin({
-        compileDebug: false,
-        inlineRuntimeFunctions: true,
-        doctype: 'html',
-        globals: ['productData'],
-        pretty: false,
-      }),
-    ],
+    plugins: [pluginPug()],
   })
     .then(() => {
       console.log(`Scripts built successfully. Output: ${outfile}`);

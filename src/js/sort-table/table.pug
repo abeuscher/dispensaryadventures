@@ -3,24 +3,36 @@ if productData !== undefined
     .grid-table.sortable
         .table-controls
             .inner
-                - var categories = products[0] ? Object.keys(products[0]) : [];
+                - let categories=Object.keys(products[0]).map(category=>{return products[0][category].label})
                 label(for="category-sort") Sort By:
                 select.category-sort
-                    each category in categories
-                        option(value=category)= category
+                    for option,idx in products[0]
+                        option(value=JSON.stringify(option),selected=option.default,data-idx=idx)=option.label      
                 select.sort-direction
-                    option(selected, value="true") asc
-                    option(value="false") desc
+                    option(selected,value="true") asc
+                    option(value="false") desc     
         .table-header
+            .table-header-row.table-row.header-header
+                .table-header-cell.table-cell.source-header(colspan="3")
+                    p Source
+                .table-header-cell.table-cell.details-header(colspan="5")
+                    p Deets
+                .table-header-cell.table-cell.score-header(colspan="4")
+                    p Scores
             .table-header-row.table-row
-                each category in categories
-                    .table-header-cell.table-cell
-                        p= category
+                each header in products[0]
+                    .table-header-cell.table-cell(class=(header.mobile ? header.type : header.type + " hide-mobile")+(header.score ? " score" : ""))
+                        p!=header.label
         .table-body
             each product in products
                 .table-body-row.table-row
-                    each value, key in product
-                        .table-body-cell.table-cell(class=key.toLowerCase().replace(/\W/g, ''))
-                            p= value
+                    - console.log(product)
+                    each item in product
+                        .table-body-cell.table-cell(class=(item.mobile ? item.type : item.type + " hide-mobile")+(item.score ? " score" : ""))
+                            if (item.link)
+                                a(href=item.link)
+                                    p(class=item.label.toLowerCase().replace(/\W/g, ''))!=item.value
+                            else
+                                p(class=item.label.toLowerCase().replace(/\W/g, ''))!=item.value
 else 
     p No products to display

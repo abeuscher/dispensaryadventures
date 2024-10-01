@@ -11,7 +11,7 @@ var siteSettings = {
   }
 };
 var parseHTML = require("./utils/parse-html.js");
-
+var productProcessor = require("./sort-table/productProcessor.js");
 var widgetTemplates = {
   "sortTable": require("./sort-table/table.pug")
 };
@@ -32,6 +32,8 @@ window.addEventListener("load", function () {
 var siteActions = [{
   "element": "#product-table-sortable",
   "action": function (els) {
+    console.log("Product Table Sortable");
+    productData = productProcessor(productData);
     if (typeof productData !== 'undefined') {
       var renderedTable = widgetTemplates.sortTable({ locals: productData });
       els[0].appendChild(parseHTML(renderedTable));

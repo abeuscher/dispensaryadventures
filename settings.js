@@ -33,7 +33,7 @@ function siteSettings() {
         srcDir: jsSrcDir,
         srcFileName: "app.js",
         buildDir: jsBuildDir,
-        buildFileName: "bundle.js"
+        buildFileName: "bundle.min.js"
       },
     ],
     templates: [
