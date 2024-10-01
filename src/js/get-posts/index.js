@@ -17,7 +17,7 @@ function GetPosts() {
             if (nextPage <= maxPages) {
                 fetch(
                     (window.location.hostname.indexOf(".local") > -1 ?
-                        "http://" : "https://") + window.location.hostname + "/wp-json/wp/v2/posts?per_page=9&page=" + nextPage)
+                        "http://" : "https://") + window.location.hostname + "/wp-json/wp/v2/posts?acf_format=standard&per_page=9&page=" + nextPage)
                     .then(data => {
                         return data.json();
                     })
