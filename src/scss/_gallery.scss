@@ -44,7 +44,7 @@
       padding: 0;
       border-radius: 50%;
       background: $bright-green;
-      margin: 0 $gutter-width/2;
+      margin: 0 calc($gutter-width/2);
       border: 1px solid transparent;
       &.is-selected {
         background: $white;
@@ -68,8 +68,8 @@
       border: none;
       font-size: 1em;
       position: absolute;
-      bottom: $gutter-width/2;
-      left: $gutter-width/2;
+      bottom: calc($gutter-width/2);
+      left: calc($gutter-width/2);
       opacity: 0.6;
       color: transparent;
       font-size: 0.8em;
@@ -93,12 +93,12 @@
     width: 100%;
     .slide-image {
       @include aspect-ratio(4, 3);
-      width: 100%;
+     &{ width: 100%;
       background-size: cover;
       background-color: $off-black;
       background-position: center center;
       background-repeat: no-repeat;
-      overflow: hidden;
+      overflow: hidden;}
     }
     .caption {
       position: absolute;

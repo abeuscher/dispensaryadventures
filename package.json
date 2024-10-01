@@ -2,9 +2,10 @@
   "name": "dispensaryadventures",
   "version": "1.0.0",
   "description": "",
-  "main": "gulpfile.js",
+  "main": "build.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
   },
   "author": "",
   "license": "MIT",
@@ -15,15 +16,7 @@
     "flickity": "^2.2.2",
     "font-awesome": "^4.7.0",
     "gsap": "^3.6.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.0",
-    "gulp-css": "^0.1.0",
-    "gulp-cssmin": "^0.2.0",
-    "gulp-ext-replace": "^0.3.0",
-    "gulp-pug": "^4.0.1",
-    "gulp-sass": "^4.1.0",
-    "gulp-uglify-es": "^2.0.0",
-    "js-cookie": "2.2.1",
+    "js-cookie": "3.0.5",
     "lodash": "^4.17.21",
     "lodash.assign": "^4.2.0",
     "pug-php-filter": "^0.0.1",
@@ -34,7 +27,13 @@
     "youtube-player": "^5.5.0"
   },
   "dependencies": {
-    "yarn": "^1.22.10"
+    "chokidar": "^4.0.1",
+    "esbuild": "^0.24.0",
+    "esbuild-plugin-pug": "^0.0.8",
+    "fs-extra": "^11.2.0",
+    "pug": "^3.0.3",
+    "sass": "^1.79.4",
+    "yarn": "^2.4.3"
   },
   "browserslist": [
     "> 1%",

@@ -21,14 +21,14 @@
   }
   .inner {
     position:relative;
-    padding:$gutter-width/2;
+    padding:calc($gutter-width/2);
     height:100%;
   }
   .thumb {
     @include aspect-ratio(4,3);
-    background-repeat:no-repeat;
+   &{ background-repeat:no-repeat;
     background-size:cover;
-    background-position:center top;
+    background-position:center top;}
   }
   .post-date {
     position:absolute;
@@ -39,9 +39,9 @@
   }
   .content {
     position:absolute;
-    bottom:$gutter-width/2;
-    left:$gutter-width/2;
-    right:$gutter-width/2;
+    bottom:calc($gutter-width/2);
+    left:calc($gutter-width/2);
+    right:calc($gutter-width/2);
     overflow:hidden;
     top:auto;
     background:rgba(0,0,0,0.6);
@@ -49,7 +49,7 @@
     h2 {
       margin:0;
       font-size:1.4em;
-      padding:$gutter-width/2;
+      padding:calc($gutter-width/2);
     }
   }
   &:hover {

@@ -22,7 +22,7 @@
             font-weight:bold;
         }
         .data-point {
-            margin-bottom:$gutter-width/2;
+            margin-bottom:calc($gutter-width/2);
         }
     }
 }

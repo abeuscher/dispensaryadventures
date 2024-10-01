@@ -1,11 +1,13 @@
+@use "sass:color";
+
 .button {
-    padding:$gutter-width/2 $gutter-width;
+    padding:calc($gutter-width/2) $gutter-width;
     border:1px solid $bright-green;
     color:$dark-green;
     font-family: $nav-font;
     margin:$gutter-width $gutter-width 0;
     &:hover {
         color:$white;
-        border-color:lighten($bright-green,20%);
+        border-color:color.adjust($bright-green, $lightness: 20%);
     }
 }

@@ -1,92 +1,59 @@
 function SortTable(tables) {
-    for (i = 0; i < tables.length; i++) {
-        var buttons = tables[i].querySelectorAll("[data-sort]");
-        let categoryMenu = tables[i].querySelectorAll(".category-sort")[0]
-        let directionMenu = tables[i].querySelectorAll(".sort-direction")[0]
+    for (let i = 0; i < tables.length; i++) {
+        const table = tables[i];
+        const categoryMenu = table.querySelector(".category-sort");
+        const directionMenu = table.querySelector(".sort-direction");
 
-        categoryMenu.addEventListener("change", e => {
-            let newValue = JSON.parse(e.target.options[e.target.selectedIndex].value)
-            doSort(directionMenu.options[directionMenu.selectedIndex].value==="true",newValue.label.toLowerCase().replace(/\W/g, ''),tables[0],newValue.type)
-        })
-        directionMenu.addEventListener("change", e => {
-            let newValue = JSON.parse(categoryMenu.options[categoryMenu.selectedIndex].value)
-            doSort(directionMenu.options[directionMenu.selectedIndex].value==="true",newValue.label.toLowerCase().replace(/\W/g, ''),tables[0],newValue.type)
-        })
-        for (b = 0; b < buttons.length; b++) {
+        categoryMenu.addEventListener("change", handleSort);
+        directionMenu.addEventListener("change", handleSort);
 
-            /*
-            buttons[b].addEventListener("click", function (e) {
-                e.preventDefault();
-                var sortField = this.getAttribute("data-sort");
-                var sortDirection = this.getAttribute("data-direction") == 'true';
-                var sortType = this.getAttribute("data-type");
-                var headers = this.parentNode.parentNode.parentNode.children;
-                for (z = 0; z < headers.length; z++) {
-                    var h = headers[z];
-                    if (h != this.parentNode.parentNode) {
-                        h.classList.remove("active");
-                    }
-                    else {
-                        h.classList.add("active");
-                    }
-                }
-                doSort(sortDirection, sortField, this.parentNode.parentNode.parentNode.parentNode.parentNode, sortType);
-                clearActive(buttons);
-                this.classList.add("active");
-            });
-            */
-        }
-        function clearActive(els) {
-            for (b = 0; b < els.length; b++) {
-                els[b].classList.remove("active");
-            }
+        function handleSort() {
+            const selectedCategory = JSON.parse(categoryMenu.options[categoryMenu.selectedIndex].value);
+            const isAscending = directionMenu.value === "true";
+            doSort(isAscending, selectedCategory.label.toLowerCase().replace(/\W/g, ''), table, selectedCategory.type);
         }
     }
 }
+
 function doSort(ascending, columnClassName, el, dataType) {
-    console.log(ascending, columnClassName, el, dataType)
-    var tbody = el.getElementsByClassName("table-body")[0];
-    var rows = tbody.getElementsByClassName("table-row");
-    var unsorted = true;
-    while (unsorted) {
-        unsorted = false;
-        for (var r = 0; r < rows.length - 1; r++) {
-            var row = rows[r];
-            var nextRow = rows[r + 1];
-            var value = row.getElementsByClassName(columnClassName)[0].innerHTML;
-            var nextValue = nextRow.getElementsByClassName(columnClassName)[0].innerHTML;
-            switch (dataType) {
-                case "number":
-                    value = cleanNumber(value);
-                    nextValue = cleanNumber(nextValue);
-                    if (!ascending ? value > nextValue : value < nextValue) {
-                        tbody.insertBefore(nextRow, row);
-                        unsorted = true;
-                    }
-                    break;
-                case "date":
-                    value = new Date(value);
-                    nextValue = new Date(nextValue);
-                    if (!ascending ? value > nextValue : value < nextValue) {
-                        tbody.insertBefore(nextRow, row);
-                        unsorted = true;
-                    }
-                    break;
-                default:
-                    if (ascending ? value > nextValue : value < nextValue) {
-                        tbody.insertBefore(nextRow, row);
-                        unsorted = true;
-                    }
-                    break;
-            }
+    const tbody = el.querySelector(".table-body");
+    const rows = Array.from(tbody.querySelectorAll(".table-row"));
 
+    rows.sort((a, b) => {
+        const aValue = a.querySelector(`.${columnClassName}`).textContent;
+        const bValue = b.querySelector(`.${columnClassName}`).textContent;
+
+        switch (dataType) {
+            case "number":
+                return compareNumbers(aValue, bValue, ascending);
+            case "date":
+                return compareDates(aValue, bValue, ascending);
+            default:
+                return compareStrings(aValue, bValue, ascending);
         }
-    }
+    });
+
+    rows.forEach(row => tbody.appendChild(row));
 }
+
+function compareNumbers(a, b, ascending) {
+    const aNum = cleanNumber(a);
+    const bNum = cleanNumber(b);
+    return ascending ? aNum - bNum : bNum - aNum;
+}
+
+function compareDates(a, b, ascending) {
+    const aDate = new Date(a);
+    const bDate = new Date(b);
+    return ascending ? aDate - bDate : bDate - aDate;
+}
+
+function compareStrings(a, b, ascending) {
+    return ascending ? a.localeCompare(b) : b.localeCompare(a);
+}
+
 function cleanNumber(n) {
-    n = n.replace("$", "");
-    n = n.replace("%", "");
-    return parseFloat(n);
+    return parseFloat(n.replace(/[$%]/g, ""));
 }
 
 module.exports = SortTable;

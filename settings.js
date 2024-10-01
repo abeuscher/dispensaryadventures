@@ -1,3 +1,5 @@
+pugPHPFilter = require('pug-php-filter');
+
 var srcDir = "./src/";
 var buildDir = "./public_html/wp-content/themes/dispensaryadventures/";
 
@@ -16,8 +18,15 @@ var templateBuildDir = buildDir;
 
 function siteSettings() {
   return {
-    siteName: "weedreviews.com",
+    siteName: "dispensaryadventures.com",
+    pugSettings: {
+      filters: {
+        php: pugPHPFilter
+      }
+    },
+    siteThumb: "screenshot.png",
     directories:[buildDir, jsBuildDir],
+    srcDir: srcDir,
     jsFiles: [
       {
         name: "Main Bundle",
@@ -44,7 +53,7 @@ function siteSettings() {
     assets: [
       {
         name: "Main Public Assets",
-        srcDir: [assetsSrcDir + "**/*"],
+        srcDir: assetsSrcDir,
         buildDir: assetsBuildDir
       }
     ]
