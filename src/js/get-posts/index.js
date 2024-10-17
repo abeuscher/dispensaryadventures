@@ -4,7 +4,7 @@ var activateImages = require("../utils/data-bg");
 var templates = {
     "postBlock": require("./post-block.pug")
 }
-console.log(templates.postBlock, typeof templates.postBlock);
+
 function GetPosts() {
     updateGallery();
     window.addEventListener("hashchange", updateGallery);

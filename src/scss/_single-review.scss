@@ -52,6 +52,13 @@
         @include bp(m) {
             flex-basis:33.3%;
         }
+        .score-content {
+            img {
+                max-width:100%;
+                height: auto;
+                margin:1em 0;
+            }
+        } 
     }
     .data-final {
         text-align:center; 
